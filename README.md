@@ -16,7 +16,7 @@
 
     ```bash
     git clone https://github.com/Nevermore-cel/Simple-shop-with-Laravel.git
-    cd shop 
+    cd Simple-shop-with-Laravel 
     ```
 
 2.  **Установка зависимостей:**
@@ -34,7 +34,7 @@
         ```
 
     *   Отредактируйте файл `.env`, указав следующие параметры:
-        *   `APP_NAME`: Название вашего приложения (например, Shop).
+        *   `APP_NAME`: Название вашего приложения (например, Laravel).
         *   `APP_ENV`:  Окружение (`local`, `production`).
         *   `APP_KEY`:  Сгенерируйте ключ приложения: `php artisan key:generate`
         *   `APP_DEBUG`:  `true` для разработки, `false` для production.
