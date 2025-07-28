@@ -81,7 +81,7 @@ class OrderController extends Controller
 
             DB::commit();
 
-            Log::info("New order created. Order ID: {$order->id}, User ID: {$user->id}");
+            Log::channel('order')->info("New order created. Order ID: {$order->id}, User ID: {$user->id}");
 
             $order = Order::with('products')->find($order->id);  // продукты для ответа
             return new OrderResource($order);
@@ -89,7 +89,7 @@ class OrderController extends Controller
         } catch (\Exception $e) {
             DB::rollback();
 
-            Log::error("Order creation failed. User ID: {$user->id}, Error: {$e->getMessage()}");
+            Log::channel('order')->error("Order status update failed. Order ID: {$order->id}, Error: {$e->getMessage()}");
             return response()->json(['message' => $e->getMessage()], 400);
         }
     }
@@ -148,13 +148,13 @@ class OrderController extends Controller
             $order->update(['status' => $newStatus]);
             DB::commit();
 
-            Log::info("Order status updated. Order ID: {$order->id}, New Status: {$newStatus}");
+            Log::channel('order')->info("Order status updated. Order ID: {$order->id}, New Status: {$newStatus}");
             return new OrderResource($order);
 
         } catch (\Exception $e) {
             DB::rollback();
 
-            Log::error("Order status update failed. Order ID: {$order->id}, Error: {$e->getMessage()}");
+            Log::channel('order')->error("Order creation failed. User ID: {$user->id}, Error: {$e->getMessage()}");
             return response()->json(['message' => $e->getMessage()], 400);
         }
     }
